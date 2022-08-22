@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/scenes/OutdoorsScene.unity
+    guid: 8124e5870f4fd4c779e7a5f994e84ad1
+  - enabled: 0
+    path: Assets/scenes/Test.unity
+    guid: 452f6137f9e08b74fbb0afb6f67e0d7d
+  - enabled: 1
+    path: Assets/scenes/MainMenu/MainMenu.unity
+    guid: a60640b508e9a3b4dab9abdf9ff9aca3
+  - enabled: 1
+    path: Assets/scenes/Lobby/Lobby.unity
+    guid: 0c52b2df7eb9f164bad66ecc64c4617f
+  - enabled: 1
+    path: Assets/scenes/Gameplay.unity
+    guid: 19caf9f2a1d5d3c4f8fb0c59e41dbc11
+  m_configObjects: {}
