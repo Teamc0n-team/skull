@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 0.057555437, b: 1, a: 1}
+    m_Value: {r: 1, g: 0.4940566, b: 0.18396229, a: 1}
   maxFogDistance:
     m_OverrideState: 1
     m_Value: 10000
@@ -50,7 +50,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 5000
   enableVolumetricFog:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   albedo:
     m_OverrideState: 0
@@ -62,8 +62,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 64
   denoisingMode:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 3
   anisotropy:
     m_OverrideState: 0
     m_Value: 0

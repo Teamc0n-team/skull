@@ -15,6 +15,14 @@ public class sk_PlayerMovment : NetworkBehaviour
 
     utils.UpdaterDelegate updater;
 
+    [SerializeField]
+    LayerMask surfaceLayerMask = 1;
+
+    private void Awake()
+    {
+        updater = IdleUpdate;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -22,8 +30,9 @@ public class sk_PlayerMovment : NetworkBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
-    void Enable()
+    public void Enable()
     {
+        Debug.Log("Movement enabled");
         updater = WorkUpdate;
     }
 
@@ -34,13 +43,39 @@ public class sk_PlayerMovment : NetworkBehaviour
             var horizontal = sk_InputManager.Singletone.m_Move.x;
             var vertical = sk_InputManager.Singletone.m_Move.y;
 
-            return new Vector3(horizontal, 0.0f, vertical);
+            return transform.forward * vertical + transform.right * horizontal;
         }
+    }
+
+    private bool IsGrounded
+    {
+        get
+        {
+            var bottomCenterPoint = new Vector3(collider.bounds.center.x, collider.bounds.min.y, collider.bounds.center.z);
+
+            bool IsG = Physics.CheckCapsule(collider.bounds.center, bottomCenterPoint, collider.bounds.size.x / 2 * 0.9f, surfaceLayerMask);
+
+            return IsG;
+        }
+    }
+
+    void CmdJump()
+    {
+        if(IsGrounded && sk_InputManager.Singletone.JumpPressed)
+        {
+            rb.AddForce(Vector3.up * nJumpForce, ForceMode.Impulse);
+        }
+    }
+
+    void IdleUpdate()
+    {
     }
 
     void WorkUpdate()
     {
         CmdMove(_movementVector);
+        CmdRotate();
+        CmdJump();
     }
 
     void CmdMove(Vector3 Movement)
@@ -48,7 +83,12 @@ public class sk_PlayerMovment : NetworkBehaviour
         rb.AddForce(Movement * nSpeed, ForceMode.Impulse);
     }
 
-    private void Update()
+    void CmdRotate()
+    {
+        transform.rotation = Quaternion.Euler(transform.rotation.x, sk_CameraControler.Singletone.Rotation.y, transform.rotation.z);
+    }
+
+    private void FixedUpdate()
     {
         updater();
     }

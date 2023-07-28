@@ -14,9 +14,12 @@ public class sk_InputManager : MonoBehaviour
         Updater = utils.EmptyUpdate;
     }
 
+    private KeyCode JumpKeyCode = KeyCode.Space;
+
     public Vector2 m_MousePos;
     public Vector2 m_Move;
 
+    public bool JumpPressed = false;
     sk_InputManager()
     {
         Singletone = this;
@@ -25,7 +28,21 @@ public class sk_InputManager : MonoBehaviour
     public void Enable()
     {
         Updater = WorkUpdater;
+
+        ToogleMouse(false);
     }
+
+    public void ToogleMouse(bool State)
+    {
+        if(State)
+        Cursor.lockState = CursorLockMode.None;
+        else
+        Cursor.lockState = CursorLockMode.Locked;
+    
+        Cursor.visible = State;
+    }
+
+    bool MouseState = false;
 
     void WorkUpdater()
     {
@@ -34,6 +51,12 @@ public class sk_InputManager : MonoBehaviour
 
         m_Move.x = Input.GetAxis("Horizontal");
         m_Move.y = Input.GetAxis("Vertical");
+
+        JumpPressed = Input.GetAxis("Jump") > 0;
+        if(JumpPressed)
+        {
+            Debug.Log("jump");
+        }
     }
 
     private void Update()

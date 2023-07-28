@@ -16,5 +16,6 @@ public class StaticPlayerData : MonoBehaviour
         SingleTone = this;  
         DontDestroyOnLoad(this);
     }
+
 }
 

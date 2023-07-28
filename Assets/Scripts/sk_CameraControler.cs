@@ -18,10 +18,10 @@ public class sk_CameraControler : MonoBehaviour
     public float SensY = 200.0f;
 
     [SerializeField]
-    Vector2 Rotation;
+    public Vector2 Rotation = Vector2.zero;
 
     [SerializeField]
-    Vector2 _MousePos;
+    Vector2 _MousePos = Vector2.zero;
 
     public utils.UpdaterDelegate updater;
 
@@ -42,7 +42,6 @@ public class sk_CameraControler : MonoBehaviour
         main.transform.position = Player.transform.position;
 
         Rotation.y += sk_InputManager.Singletone.m_MousePos.x;
-
 
         Rotation.x -= sk_InputManager.Singletone.m_MousePos.y;
         Rotation.x = Mathf.Clamp(Rotation.x, -90f, 90f);

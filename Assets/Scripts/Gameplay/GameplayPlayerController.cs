@@ -15,8 +15,13 @@ public class GameplayPlayerController : NetworkBehaviour
     [SyncVar]
     public string sName;
 
+    [SerializeField]
+    sk_PlayerMovment movment;
+
     public void Start()
     {
+        movment = GetComponent<sk_PlayerMovment>();
+
         if (StaticPlayerData.SingleTone.IsGameStarted)
         {
             LobbyUIController.Singletone = null;
@@ -26,6 +31,9 @@ public class GameplayPlayerController : NetworkBehaviour
             if (isLocalPlayer)
             {
                 CmdInstallNick(StaticPlayerData.SingleTone.nickname);
+                sk_InputManager.Singletone.Enable();
+
+                movment.Enable();
                 sk_CameraControler.Singletone.SetupPlayer(gameObject);
             }
         }
